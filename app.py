@@ -8,7 +8,7 @@ import zipfile
 
 #Application Setup
 UPLOAD_DIR = 'uploads'
-ALLOWED_EXTENSIONS = set(['zip', 'rar', 'tar.gz', 'tar.bz2'])
+ALLOWED_EXTENSIONS = set(['zip']) #Support for other file types coming soon.
 
 app = Flask(__name__)
 app.config['UPLOAD_DIR'] = UPLOAD_DIR
@@ -34,6 +34,8 @@ def upload():
                 zip_file.extractall(path=os.path.join(os.getcwd(), app.config['UPLOAD_DIR']))
                 os.unlink(filename)
             response_url = moss.get_results('python', 'py', app.config['UPLOAD_DIR'])
+            if 'Checking files' in response_url:
+                return render_template('failure.html')
             return redirect(response_url)
         return render_template('failure.html')
     return render_template('upload.html')
