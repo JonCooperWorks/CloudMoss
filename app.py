@@ -31,7 +31,7 @@ def upload():
             filename = os.path.join(app.config['UPLOAD_DIR'], secure_filename(f.filename))
             f.save(filename)
             with zipfile.ZipFile(filename) as zip_file:
-                zip_file.extractall()
+                zip_file.extractall(path=os.path.join(os.getcwd(), app.config['UPLOAD_DIR']))
                 os.unlink(filename)
             response_url = moss.get_results('python', 'py', app.config['UPLOAD_DIR'])
             return redirect(response_url)
