@@ -1,5 +1,7 @@
 '''
-Script to run moss against a directory of files.
+Python moss driver. 
+Currently only supports checking against a directory, and in theory, base file support,
+however, base files are not supported at this time.
 '''
 
 import subprocess

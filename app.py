@@ -1,3 +1,7 @@
+'''
+CloudMoss - Check against moss in the cloud.
+'''
+
 from flask import Flask, render_template, request, make_response, redirect
 from werkzeug import secure_filename
 
@@ -10,7 +14,6 @@ import zipfile
 app = Flask(__name__)
 app.config['UPLOAD_DIR'] = 'uploads'
 app.config['ALLOWED_EXTENSIONS'] = set(['zip']) #Support for other file types coming soon.
-app.config['S3_BUCKET_NAME'] = None
 
 #Helper methods
 def valid_file(filename):
