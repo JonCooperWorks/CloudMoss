@@ -21,8 +21,8 @@ get_results('python', 'py', 'path/to/files')
 def get_results(language, extension, directory, base_file=None):
     directory = os.path.join(os.getcwd(), directory)
     if base_file is not None:
-        cmd = 'perl moss -l %s -d %s/*.%s -b %s' % (language, directory, extension, base_file)
+        cmd = 'perl moss -l %s -d %s/*/*.%s -b %s' % (language, directory, extension, base_file)
     else:
-        cmd = 'perl moss -l %s -d %s/*.%s' % (language, directory, extension)
+        cmd = 'perl moss -l %s -d %s/*/*.%s' % (language, directory, extension)
     results_url = _run_command(cmd).split('\n')[-2]
     return results_url

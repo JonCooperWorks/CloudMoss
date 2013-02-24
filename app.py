@@ -4,6 +4,7 @@ from werkzeug import secure_filename
 import os
 import datetime
 import moss
+import zipfile
 
 #Application Setup
 UPLOAD_DIR = 'uploads'
@@ -15,7 +16,7 @@ app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
 
 #Helper methods
 def valid_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS'] or True
+    return '.' in filename and filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
 
 def filetype(filename):
     return filename.rsplit('.', 1)[1]
@@ -29,6 +30,9 @@ def upload():
         if f and valid_file(f.filename):
             filename = os.path.join(app.config['UPLOAD_DIR'], secure_filename(f.filename))
             f.save(filename)
+            with zipfile.ZipFile(filename) as zip_file:
+                zip_file.extractall()
+                os.unlink(filename)
             response_url = moss.get_results('python', 'py', app.config['UPLOAD_DIR'])
             return redirect(response_url)
         return render_template('failure.html')
