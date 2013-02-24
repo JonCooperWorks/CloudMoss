@@ -1,11 +1,3 @@
-'''
-From sober me:
-@app.route('/<language>', methods=['GET', 'POST'])
-def upload(language):
-    ...
-Fill in the blanks, bro.
-'''
-
 from flask import Flask, render_template, request, make_response, redirect
 from werkzeug import secure_filename
 
@@ -15,12 +7,10 @@ import moss
 import zipfile
 
 #Application Setup
-UPLOAD_DIR = 'uploads'
-ALLOWED_EXTENSIONS = set(['zip']) #Support for other file types coming soon.
-
 app = Flask(__name__)
-app.config['UPLOAD_DIR'] = UPLOAD_DIR
-app.config['ALLOWED_EXTENSIONS'] = ALLOWED_EXTENSIONS
+app.config['UPLOAD_DIR'] = 'uploads'
+app.config['ALLOWED_EXTENSIONS'] = set(['zip']) #Support for other file types coming soon.
+app.config['S3_BUCKET_NAME'] = None
 
 #Helper methods
 def valid_file(filename):
@@ -37,10 +27,11 @@ def upload(language='python'):
     if request.method == 'POST':
         f = request.files['assignment']
         if f and valid_file(f.filename):
-            filename = os.path.join(app.config['UPLOAD_DIR'], secure_filename(f.filename))
+            language_dir = os.path.join(os.getcwd(), os.path.join(app.config['UPLOAD_DIR'], language))
+            filename = os.path.join(language_dir, secure_filename(f.filename))
             f.save(filename)
             with zipfile.ZipFile(filename) as zip_file:
-                zip_file.extractall(path=os.path.join(os.getcwd(), app.config['UPLOAD_DIR']))
+                zip_file.extractall(path=language_dir)
                 os.unlink(filename)
             response_url = moss.get_results(language, app.config['UPLOAD_DIR'])
             if 'Checking files' in response_url:
@@ -49,8 +40,11 @@ def upload(language='python'):
         return render_template('failure.html')
     return render_template('upload.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 
 #App runner
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5000)))
+    app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5000)), debug=True)

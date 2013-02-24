@@ -13,9 +13,13 @@ def _run_command(command):
         return reduce(lambda x,y : x+y, iter(p.stdout.readline, b''))
 
 #Languages and their file extensions
-EXTENSIONS {
+EXTENSIONS = {
     'python' : 'py',
     'java' : 'java',
+    'scheme' : 'sch',
+    'lisp' : 'lisp',
+    'c' : 'c',
+    'cc' : 'cc',
 }
 
 '''
@@ -26,8 +30,9 @@ get_results('python', 'py', 'path/to/files')
 '''
 def get_results(language, directory, base_file=None):
     if base_file is not None:
-        cmd = 'perl moss -l %s -d %s/*/*.%s -b %s' % (language, directory, EXTENSIONS[language], base_file)
+        cmd = 'perl moss -l %s -d %s/%s/*/*.%s -b %s' % (language, directory, language, EXTENSIONS[language], base_file)
     else:
-        cmd = 'perl moss -l %s -d %s/*/*.%s' % (language, directory, EXTENSIONS[language])
+        cmd = 'perl moss -l %s -d %s/%s/*/*.%s' % (language, directory, language, EXTENSIONS[language])
     results_url = _run_command(cmd).split('\n')[-2]
+    print cmd
     return results_url

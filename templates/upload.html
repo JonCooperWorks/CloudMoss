@@ -1,20 +1,42 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Moss Test</h1>
-<h2>Instructions</h2>
-<p>
-    Upload a <strong>ZIP FILE</strong> containing your assignment here. We'll handle the rest. This only works if people make it work though. It currently only supports zip files containing Python code. Support for <del>Java</del> and other compression formats coming soon, if there is adequate demand (Read: If I can bother to.) 
-</p>
-<p>
-    UPDATE: Java works!
-</p>
-<p>
-    <strong>NOTE:</strong> Your zip file MUST contain a folder with your Python code in it, otherwise it just won't work.
-</p>
-<form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
-    <div><label for='assignment'>Your assignment</label></div>
-    <div><input type='file' name='assignment' /></div>
-    <div><input type='submit' value='Upload' /></div>
-</form>
+<div class="jumbotron">
+    <h1>CloudMoss</h1>
+    <p class="lead">
+        <h2>Instructions</h2>
+        <p>
+            Upload a <strong>ZIP FILE</strong> containing your assignment here. We'll handle the rest. This only works if people make it work though. It currently supports zip files containing Python and Java code. Support for other compression formats coming soon, if there is adequate demand (Read: If I can bother to.) 
+        </p>
+        <p>
+            <strong>NOTE:</strong> Your zip file MUST contain a folder with your code in it, otherwise it just won't work.
+        </p>
+    </p>
+    <form class="form-horizontal" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+        <fieldset>
+            <div id="legend" class="">
+                <legend class="">Upload your zip</legend>
+            </div>
+        
+
+            <div class="control-group">
+
+                <!-- File Upload -->
+                <div class="controls pull-left">
+                    <input name="assignment" type="file">
+                </div>
+            </div>
+
+            <div>
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <input type="submit" class="btn btn-primary pull-left" value='Upload' />
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+
+
 {% endblock %}
