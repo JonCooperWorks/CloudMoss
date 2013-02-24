@@ -1,3 +1,11 @@
+'''
+From sober me:
+@app.route('/<language>', methods=['GET', 'POST'])
+def upload(language):
+    ...
+Fill in the blanks, bro.
+'''
+
 from flask import Flask, render_template, request, make_response, redirect
 from werkzeug import secure_filename
 
@@ -24,7 +32,8 @@ def filetype(filename):
 
 #Controllers
 @app.route('/', methods=['GET', 'POST'])
-def upload():
+@app.route('/<language>', methods=['GET', 'POST'])
+def upload(language='python'):
     if request.method == 'POST':
         f = request.files['assignment']
         if f and valid_file(f.filename):
@@ -33,7 +42,7 @@ def upload():
             with zipfile.ZipFile(filename) as zip_file:
                 zip_file.extractall(path=os.path.join(os.getcwd(), app.config['UPLOAD_DIR']))
                 os.unlink(filename)
-            response_url = moss.get_results('python', 'py', app.config['UPLOAD_DIR'])
+            response_url = moss.get_results(language, app.config['UPLOAD_DIR'])
             if 'Checking files' in response_url:
                 return render_template('failure.html')
             return redirect(response_url)
