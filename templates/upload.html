@@ -9,7 +9,10 @@
       Upload a <strong>ZIP FILE</strong> containing your assignment here. We'll handle the rest. This only works if people make it work though. It currently supports zip files containing Python and Java code. Support for other compression formats coming soon, if there is adequate demand (Read: If I can bother to.) 
     </p>
     <p>
-      <strong>NOTE:</strong> Your zip file MUST contain a folder with your code in it, otherwise it just won't work.
+      <strong>NOTE:</strong> Your zip file MUST contain a single folder with all your code in it, or else the moss check won't work. This is a limitation of this site being written in a few hours, and passing uploads in a folder to a script. 
+    </p>
+    <p>
+      Example: file.zip -> myfolder -> {file1.java, file2.java, file3.java, etc.}
     </p>
   </p>
   <form class="form-horizontal" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">

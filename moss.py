@@ -12,17 +12,18 @@ def _run_command(command):
         p = subprocess.Popen(command,
                              stdout=subprocess.PIPE,
                              shell=True)
-        return reduce(lambda x,y : x+y, iter(p.stdout.readline, b''))
+        return reduce(lambda x,y: x+y, iter(p.stdout.readline, b''))
 
 #Languages and their file extensions
 EXTENSIONS = {
-    'python' : 'py',
-    'java' : 'java',
-    'scheme' : 'sch',
-    'lisp' : 'lisp',
-    'c' : 'c',
-    'cc' : 'cc',
+    'python': 'py',
+    'java': 'java',
+    'scheme': 'sch',
+    'lisp': 'lisp',
+    'c': 'c',
+    'cc': 'cc',
 }
+
 
 '''
 Sends a file to moss for examination.
