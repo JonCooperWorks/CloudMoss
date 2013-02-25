@@ -2,7 +2,7 @@
 CloudMoss - Check against moss in the cloud.
 '''
 
-from flask import Flask, render_template, request, make_response, redirect
+from flask import Flask, render_template, request, redirect, abort
 from werkzeug import secure_filename
 
 import os
@@ -14,6 +14,7 @@ import zipfile
 app = Flask(__name__)
 app.config['UPLOAD_DIR'] = 'uploads'
 app.config['ALLOWED_EXTENSIONS'] = set(['zip']) #Support for other file types coming soon.
+app.config['SUPPORTED_LANGUAGES'] = set(['java', 'python'])
 
 #Helper methods
 def valid_file(filename):
@@ -27,6 +28,8 @@ def filetype(filename):
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/<language>', methods=['GET', 'POST'])
 def upload(language='python'):
+    if language not in app.config['SUPPORTED_LANGUAGES']:
+        abort(404)
     if request.method == 'POST':
         f = request.files['assignment']
         if f and valid_file(f.filename):
@@ -41,7 +44,7 @@ def upload(language='python'):
                 return render_template('failure.html')
             return redirect(response_url)
         return render_template('failure.html')
-    return render_template('upload.html')
+    return render_template('upload.html', language=language)
 
 @app.route('/about')
 def about():
