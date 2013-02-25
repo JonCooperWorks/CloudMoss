@@ -55,6 +55,10 @@ def view(language):
     response_url = moss.get_results(language, app.config['UPLOAD_DIR'])
     return redirect(response_url)
 
+@app.errorhandler(404)
+def not_found(e):
+    return render_template('404.html'), 404
+
 #App runner
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.getenv('PORT', 5000)), debug=True)

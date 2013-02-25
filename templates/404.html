@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="alert alert-error alert-block">
+  <h3>Page not found</h3>
+  <p>
+    Go <a href="{{ url_for('upload') }}">home</a>
+  </p>
+</div>
+{% endblock %}
