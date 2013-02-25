@@ -5,8 +5,6 @@
     <meta charset="utf-8">
     <title>CloudMoss</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
     <!-- Le styles -->
     <link href="static/css/bootstrap.css" rel="stylesheet">
@@ -47,26 +45,44 @@
         margin-top: 28px;
       }
     </style>
-    <link href="static/css/bootstrap-responsive.css" rel="stylesheet">
+
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
+      <script src="static/js/html5shiv.js"></script>
     <![endif]-->
   </head>
 
   <body>
-
+    <div id="header">
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="/">CloudMoss</a>
+            <div class="nav-collapse">
+              <ul class="nav">
+                <li><a href="{{ url_for('upload') }}">Upload File</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">View results<b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{{ url_for('view', language='python') }}">Python</a></li>
+                    <li><a href="{{ url_for('view', language='java') }}">Java</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div><!-- /.navbar .container -->
+        </div><!-- /.navbar-inner -->
+      </div><!-- /navbar --> 
+    </div>
     <div class="container-narrow">
-
-      <div class="masthead">
-        <ul class="nav nav-pills pull-right">
-          <li><a href="{{ url_for('upload') }}">Upload file</a></li>
-          <li><a href="{{ url_for('about') }}">About</a></li>
-        </ul>
-        <h3 class="muted">CloudMoss</h3>
-      </div>
-
+      
       <hr>
 
       {% block content %}
@@ -83,19 +99,8 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/bootstrap-transition.js"></script>
-    <script src="../assets/js/bootstrap-alert.js"></script>
-    <script src="../assets/js/bootstrap-modal.js"></script>
-    <script src="../assets/js/bootstrap-dropdown.js"></script>
-    <script src="../assets/js/bootstrap-scrollspy.js"></script>
-    <script src="../assets/js/bootstrap-tab.js"></script>
-    <script src="../assets/js/bootstrap-tooltip.js"></script>
-    <script src="../assets/js/bootstrap-popover.js"></script>
-    <script src="../assets/js/bootstrap-button.js"></script>
-    <script src="../assets/js/bootstrap-collapse.js"></script>
-    <script src="../assets/js/bootstrap-carousel.js"></script>
-    <script src="../assets/js/bootstrap-typeahead.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="static/js/bootstrap.js"></script>
 
   </body>
 </html>

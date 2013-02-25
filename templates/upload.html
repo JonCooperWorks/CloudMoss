@@ -2,40 +2,40 @@
 
 {% block content %}
 <div class="jumbotron">
-    <h1>CloudMoss</h1>
-    <p class="lead">
-        <h2>Instructions</h2>
-        <p>
-            Upload a <strong>ZIP FILE</strong> containing your assignment here. We'll handle the rest. This only works if people make it work though. It currently supports zip files containing Python and Java code. Support for other compression formats coming soon, if there is adequate demand (Read: If I can bother to.) 
-        </p>
-        <p>
-            <strong>NOTE:</strong> Your zip file MUST contain a folder with your code in it, otherwise it just won't work.
-        </p>
+  <h1>CloudMoss</h1>
+  <p class="lead">
+    <h2>Instructions</h2>
+    <p>
+      Upload a <strong>ZIP FILE</strong> containing your assignment here. We'll handle the rest. This only works if people make it work though. It currently supports zip files containing Python and Java code. Support for other compression formats coming soon, if there is adequate demand (Read: If I can bother to.) 
     </p>
-    <form class="form-horizontal" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
-        <fieldset>
-            <div id="legend" class="">
-                <legend class="">Upload your zip</legend>
-            </div>
-        
+    <p>
+      <strong>NOTE:</strong> Your zip file MUST contain a folder with your code in it, otherwise it just won't work.
+    </p>
+  </p>
+  <form class="form-horizontal" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+    <fieldset>
+      <div id="legend" class="">
+        <legend class="">Upload your zip</legend>
+      </div>
+    
 
-            <div class="control-group">
+      <div class="control-group">
 
-                <!-- File Upload -->
-                <div class="controls pull-left">
-                    <input name="assignment" type="file">
-                </div>
-            </div>
+        <!-- File Upload -->
+        <div class="controls pull-left">
+          <input name="assignment" type="file">
+        </div>
+      </div>
 
-            <div>
-                <!-- Form Actions -->
-                <div class="form-actions">
-                    <input type="submit" class="btn btn-primary pull-left" value='Upload' />
-                </div>
-            </div>
+      <div>
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <input type="submit" class="btn btn-primary pull-left" value='Upload' />
+        </div>
+      </div>
 
-        </fieldset>
-    </form>
+    </fieldset>
+  </form>
 </div>
 
 

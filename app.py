@@ -47,6 +47,10 @@ def upload(language='python'):
 def about():
     return render_template('about.html')
 
+@app.route('/view/<language>')
+def view(language):
+    response_url = moss.get_results(language, app.config['UPLOAD_DIR'])
+    return redirect(response_url)
 
 #App runner
 if __name__ == '__main__':
